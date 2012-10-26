@@ -18,4 +18,8 @@ Gem::Specification.new do |gem|
   gem.add_dependency "open4", "~> 1.3.0"
   gem.add_development_dependency "rake"
   gem.add_development_dependency "rspec", "~> 2.11.0"
+  gem.add_development_dependency("rb-fsevent", "~> 0.9.2") if RUBY_PLATFORM =~ /darwin/i
+  gem.add_development_dependency "guard", "~> 1.5.0"
+  gem.add_development_dependency "guard-bundler", "~> 1.0.0"
+  gem.add_development_dependency "guard-rspec", "~> 2.1.0"
 end

@@ -139,7 +139,7 @@ module Open3
         yield(i, o, t)
       end
     else
-      i, o, e = popen3(*cmd)
+      i, o, e, t = popen3(*cmd)
       e.close
       return [i, o, t]
     end
@@ -247,7 +247,7 @@ module Open3
         o.binmode
         e.binmode
       end
-      
+
       i_complete = i_data.empty?
       o_complete = false
       e_complete = false
@@ -350,7 +350,7 @@ module Open3
         o.binmode
         e.binmode
       end
-      
+
       i_complete = i_data.empty?
       o_complete = false
 
@@ -425,7 +425,7 @@ module Open3
         o.binmode
         e.binmode
       end
-      
+
       i_complete = i_data.empty?
       o_complete = false
       e_complete = false
