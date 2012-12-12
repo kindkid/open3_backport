@@ -99,6 +99,9 @@ Here are some examples that should work fine...
     # capture make log
     make_log, s = Open3.capture2e("make")
 
+
+The following examples do not work yet. Pull requests are welcome!
+
     source = "foo.c"
     Open3.popen2e("gcc", "-Wall", source) do |i, oe, t|
       oe.each do |line|
@@ -192,6 +195,29 @@ Here are some examples that should work fine...
     #   106
     #   202
 
+## Version History
+
+0.0.1 - Initial release. No support for setting environment nor
+passing any of the special options that Process.spawn supports in Ruby 1.9.
+These methods are not yet implemented: popen2e, pipeline, pipeline_start,
+pipeline_r, pipeline_w, pipeline_rw.
+
+## Credits
+
+This gem was written by Chris Johnson for Crossroads Systems, Inc.  The code
+and documentation was copied from the Ruby 1.9.3 stdlib, and then key method
+implementations were re-written and tested to work in Ruby 1.8.7, while aiming
+to maintain maximum compatibility with the Ruby 1.9.3 method interfaces. The
+replacement implementation makes heavy use of the open4 gem.
+
+## License
+
+The important bits of open3_backport are pulled directly from Ruby source,
+available at http://www.ruby-lang.org/. Copyrights of all other code in
+the gem are assigned to the copyright owner of Ruby (Yukihiro Matsumoto).
+
+This gem is available under the same license(s) as Ruby itself (See LICENSE
+file).
 
 ## Contributing
 
