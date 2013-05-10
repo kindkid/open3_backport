@@ -30,8 +30,28 @@ module Open3
   def detach(pid) # :nodoc:
     thread = Process.detach(pid)
     thread[:pid] = pid
-    def thread.pid
-      self[:pid]
+    thread.instance_eval do
+
+      def pid
+        self[:pid]
+      end
+
+      alias :old_value :value
+
+      def value(*args)
+        wait_for_process_to_finish
+        old_value(*args)
+      end
+
+      def wait_for_process_to_finish
+        return if @waited
+        Process.waitpid(pid)
+        wakeup
+        @waited = true
+      rescue
+        # Ignore
+      end
+
     end
     thread
   end
