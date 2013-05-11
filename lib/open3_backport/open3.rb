@@ -1,8 +1,8 @@
 #
 # = open3.rb: Popen, but with stderr, too
 #
-# Author:: Yukihiro Matsumoto, backport by Chris Johnson
-# Documentation:: Konrad Meyer, backport by Chris Johnson
+# Author:: Yukihiro Matsumoto, backport by Chris Johnson & David McCullars
+# Documentation:: Konrad Meyer, backport by Chris Johnson & David McCullars
 #
 # Open3 gives you access to stdin, stdout, and stderr when running other
 # programs.
@@ -36,20 +36,14 @@ module Open3
         self[:pid]
       end
 
-      alias :old_value :value
-
       def value(*args)
-        wait_for_process_to_finish
-        old_value(*args)
-      end
-
-      def wait_for_process_to_finish
-        return if @waited
-        Process.waitpid(pid)
-        wakeup
-        @waited = true
-      rescue
-        # Ignore
+        self[:value] ||= begin
+          Process.waitpid(pid) rescue nil
+          $?
+        ensure
+          self.run
+          self.join
+        end
       end
 
     end

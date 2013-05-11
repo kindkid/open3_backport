@@ -197,8 +197,9 @@ The following examples do not work yet. Pull requests are welcome!
 
 ## Version History
 
+0.0.3 - Bugfix: Critical performance enhancement.
+
 0.0.2 - Bugfix: Include open3 explicitly before redefining.
-        Thanks david-mccullars!
 
 0.0.1 - Initial release. No support for setting environment nor
 passing any of the special options that Process.spawn supports in Ruby 1.9.
